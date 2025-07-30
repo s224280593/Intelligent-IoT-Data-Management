@@ -1,3 +1,4 @@
+###Contributor: Thoufiya Shaik
 # Intelligent IoT Data Management Platform 🚀
 
 A modular platform for intelligent anomaly detection and visualization of time series sensor data from IoT devices.
