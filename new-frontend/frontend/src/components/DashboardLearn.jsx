@@ -6,10 +6,7 @@ import LineChartComponent from './LineChartComponent';
 
 import './Dashboard.css'; // Add styling here
 
-// test
-
 const streams = ['stream1', 'stream2', 'stream3'];
-
 
 const multiStreamData = [
   { timestamp: '2025-07-01', stream1: 24, stream2: 35, stream3: 45 },
@@ -24,7 +21,6 @@ const sampleData = [
   { timestamp: '2025-07-03', value: 31 },
   { timestamp: '2025-07-04', value: 27 }
 ];
-
 
 function DashboardLearn() {
   return (
@@ -41,3 +37,4 @@ function DashboardLearn() {
 }
 
 export default DashboardLearn;
+
