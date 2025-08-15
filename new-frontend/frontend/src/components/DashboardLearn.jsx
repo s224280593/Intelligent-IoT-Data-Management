@@ -28,7 +28,7 @@ const sampleData = [
 ];
 
 
-function Dashboard() {
+function DashboardLearn() {
   return (
     <div className="dashboard-container">
       
@@ -42,4 +42,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default DashboardLearn;
