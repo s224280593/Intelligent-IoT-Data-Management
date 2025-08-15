@@ -20,7 +20,8 @@ The Intelligent IoT Data Management Platform is designed to provide a smarter wa
 ## Tech Stack
 
 ### Frontend
-- **React.js** for building a dynamic single-page application with a responsive user interface.
+- **React.js** for building a dynamic application with a responsive user interface.
+- **Rechart.js & chart.js** for displaying charts.  
 - **Tailwind CSS** for fast, consistent, and modern styling, ensuring the UI is both attractive and user-friendly.
 
 ### Backend
@@ -38,10 +39,6 @@ The Intelligent IoT Data Management Platform is designed to provide a smarter wa
 - **GitHub** is used for version control, collaboration, and continuous development/deployment, with clear project tracking and code review processes.
 
 ## Features
-
-- **Upload and filter sensor data (CSV, JSON):**  
-  Users can upload their own sensor datasets in common formats, apply filters, and prepare data for analysis.
-
 - **Correlation analysis and anomaly detection:**  
   The system identifies relationships between sensor streams using correlation analysis, and detects outliers using multiple machine learning approaches, including Z-score, Isolation Forest, LSTM, and One-Class SVM.
 
