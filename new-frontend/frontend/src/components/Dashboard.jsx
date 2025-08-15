@@ -1,45 +1,130 @@
-import BasicLine from './BasicLine';
-import SensorStreams from './SensorStreams';
-import SingleLineChart from './SingleLineChart';
-import LineChartComponent from './LineChartComponent';
-//import Correlation from './Correlation';
+import React, { useState } from 'react';
+import { useSensorData } from '../hooks/useSensorData.js';
+import { useFilteredData } from '../hooks/useFilteredData.js';
+import { useStreamNames } from '../hooks/useStreamNames.js';
+import { useTimeRange } from '../hooks/useTimeRange.js';
+import TimeSelector from './TimeSelector.jsx';
+import StreamSelector from './StreamSelector.jsx';
+import IntervalSelector from './IntervalSelector.jsx';
+import StreamStats from './StreamStats.jsx';
+import './Dashboard.css';
+import Chart from './Chart.jsx';
 
-import './Dashboard.css'; // Add styling here
+//import { useCorrelationMatrix } from '../hooks/useCorrelationMatrix.js/index.js';
 
-// test
+// ⏱ Default to first stream and first 12 hours
+  
 
-const streams = ['stream1', 'stream2', 'stream3'];
+const Dashboard = () => {
+  const { data, loading, error } = useSensorData(true); // mock mode
+  const streamNames = useStreamNames(data);
+  const [startTime, endTime] = useTimeRange(data);
+  const timeOptions = useTimeRange(data);
+  const [selectedTimeStart, setSelectedTimeStart] = useState('');
+  const [selectedTimeEnd, setSelectedTimeEnd] = useState('');
+  //const correlation = useCorrelationMatrix(data, streamNames, startTime, endTime);
+  const [selectedStreams, setSelectedStreams] = useState([]);
+  
 
+  const intervals = ['5min', '15min', '1h', '6h'];
 
+  const [selectedInterval, setSelectedInterval] = useState(intervals[0]);
 
+  //const [selectedTimeRange, setSelectedTimeRange] = useState(3600000); // 1 hour
+  
 
-const multiStreamData = [
-  { timestamp: '2025-07-01', stream1: 24, stream2: 35, stream3: 45 },
-  { timestamp: '2025-07-02', stream1: 28, stream2: 30, stream3: 40 },
-  { timestamp: '2025-07-03', stream1: 32, stream2: 33, stream3: 42 },
-  { timestamp: '2025-07-04', stream1: 31, stream2: 36, stream3: 39 }
-];
+  const filteredData = useFilteredData(data, {
+    startTime: selectedTimeStart,
+    endTime: selectedTimeEnd,
+    selectedStreams,
+    interval: selectedInterval
+  });
 
-const sampleData = [
-  { timestamp: '2025-07-01', value: 23 },
-  { timestamp: '2025-07-02', value: 28 },
-  { timestamp: '2025-07-03', value: 31 },
-  { timestamp: '2025-07-04', value: 27 }
-];
+  const handleSubmit = () => {
+  console.log('Selected Time Range:', selectedTimeStart, '→', selectedTimeEnd);
+  
+  console.log('selectedInterval:', selectedInterval);
+  // You can filter data, send to backend, or trigger chart updates
 
+  console.log('Filtered Data:', filteredData);
 
-function Dashboard() {
+};
+
+  if (loading) return <p>Loading dataset...</p>;
+  if (error) return <p>Error loading data</p>;
+
   return (
-    <div className="dashboard-container">
+    <div >
+
+      <div className='label-plate'>Hello World! I just came alive with this Sensor Data Set with 7 fields!!</div>
+        <div className='dashboard-container'>
+          <div className='label-plate'>Streams: {streamNames.map(s => s.name).join(', ')}
+          </div>
+
+          <div className='selector-grid '>      
+            <div className='selector-group card'>
+
+            <StreamSelector 
+            data={data}
+            // streams={streamNames}
+            selectedStreams={selectedStreams}
+            setSelectedStreams={setSelectedStreams}
+            />
+            </div>
+            <div className='selector-group card'> 
+            <IntervalSelector
+            intervals={intervals}
+            selectedInterval={selectedInterval}
+            setSelectedInterval={setSelectedInterval}
+            />
+            </div>
       
-      <div className="dashboard-grid">
-        <div className="panel"><SensorStreams /></div>
-        <div className="panel"><BasicLine /></div>
-        <div className="panel"><SingleLineChart data={sampleData}/></div>
-        <div className="panel"><LineChartComponent data={multiStreamData} streamKeys={streams} /></div>
+      {/* <p>Time Range: {startTime?.toISOString()} – {endTime?.toISOString()}</p>  */}
+      {/* <pre>{JSON.stringify(correlation, null, 2)}</pre>
+      {/* Add dropdowns, charts, etc. */}
+
+            <div className='selector-group card'>
+            
+            <h3>Time Range Selection</h3>
+        
+              <div className='card-content'>
+                <div>
+              <TimeSelector
+                label="Start Time"
+                timeOptions={timeOptions}
+                selectedTime={selectedTimeStart}
+                setSelectedTime={setSelectedTimeStart}
+              />
+                </div>
+                <div>
+              <TimeSelector
+                label="End Time"
+                timeOptions={timeOptions}
+                selectedTime={selectedTimeEnd}
+                setSelectedTime={setSelectedTimeEnd}
+              />
+                </div>
+        
+                <div className='button'>
+                <button onClick={handleSubmit}>Analyse Time Range</button>
+                </div>          
+              </div>
+            </div>
+          </div>
+      
+      <div className='stream-stats'>
+      {selectedStreams.map(stream => (
+      <StreamStats key={stream} data={filteredData} stream={stream} />
+      ))}
       </div>
+
+     
+      <div className="chart-container">
+        <Chart data={filteredData} selectedStreams={selectedStreams} /></div>
+
     </div>
+</div>    
   );
-}
+};
 
 export default Dashboard;
