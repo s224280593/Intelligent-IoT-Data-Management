@@ -12,7 +12,6 @@ const streams = ['stream1', 'stream2', 'stream3'];
 
 
 
-
 const multiStreamData = [
   { timestamp: '2025-07-01', stream1: 24, stream2: 35, stream3: 45 },
   { timestamp: '2025-07-02', stream1: 28, stream2: 30, stream3: 40 },
@@ -27,19 +26,21 @@ const sampleData = [
   { timestamp: '2025-07-04', value: 27 }
 ];
 
-
 function Dashboard() {
   return (
     <div className="dashboard-container">
       
       <div className="dashboard-grid">
-        <div className="panel"><SensorStreams /></div>
-        <div className="panel"><BasicLine /></div>
-        <div className="panel"><SingleLineChart data={sampleData}/></div>
-        <div className="panel"><LineChartComponent data={multiStreamData} streamKeys={streams} /></div>
+        <div className="card"><SensorStreams /></div>
+        <div className="card"><BasicLine /></div>
+        <div className="card"><SingleLineChart data={sampleData}/></div>
+        <div className="card"><LineChartComponent data={multiStreamData} streamKeys={streams} /></div>
       </div>
     </div>
   );
 }
 
 export default Dashboard;
+
+
+
