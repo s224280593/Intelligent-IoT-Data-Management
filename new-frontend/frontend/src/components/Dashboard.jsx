@@ -9,10 +9,10 @@ import IntervalSelector from './IntervalSelector.jsx';
 import StreamStats from './StreamStats.jsx';
 import './Dashboard.css';
 import Chart from './Chart.jsx';
-
+import MostCorrelatedPair from './MostCorrelatedPair.jsx';
 //import { useCorrelationMatrix } from '../hooks/useCorrelationMatrix.js/index.js';
 
-// ⏱ Default to first stream and first 12 hours
+
   
 
 const Dashboard = () => {
@@ -111,14 +111,19 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-      
+      <div>
       <div className='stream-stats'>
       {selectedStreams.map(stream => (
       <StreamStats key={stream} data={filteredData} stream={stream} />
       ))}
+
+      {selectedStreams.length > 2 && <MostCorrelatedPair data={filteredData} 
+      streams={selectedStreams} />}
       </div>
 
-     
+
+      </div>
+
       <div className="chart-container">
         <Chart data={filteredData} selectedStreams={selectedStreams} /></div>
 
