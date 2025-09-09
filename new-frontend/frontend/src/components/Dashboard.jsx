@@ -43,12 +43,14 @@ const Dashboard = () => {
 
   const handleSubmit = () => {
   console.log('Selected Time Range:', selectedTimeStart, '→', selectedTimeEnd);
+
   
   console.log('selectedInterval:', selectedInterval);
   // You can filter data, send to backend, or trigger chart updates
 
   console.log('Filtered Data:', filteredData);
   console.log('Selected Pair:', selectedPair);
+ 
 };
 
   if (loading) return <p>Loading dataset...</p>;
@@ -58,7 +60,7 @@ const Dashboard = () => {
 <div >
 
   <div className='info-plate'>
-    <p>Note: 
+    <h3>Note: </h3>
       <ol>
         <li>Select at least one stream to view the line chart.</li>
         <li>Select two streams to see their scatter plot with a trendline, their correlation coefficient, and a rolling correlation line plot in the time interval using the selected time-window.</li>
@@ -69,10 +71,10 @@ const Dashboard = () => {
         <li>If no meaningful scatter plot is available for the most correlated pair, it means one or both streams lack variance in the selected time range.</li>
         <li>If no time range is selected, the entire dataset is used.</li>
       </ol>
-    </p>
-    <h3> Total Data Points in Dataset: {data.length} |
-
-    Data Points in Selected Range: {filteredData.length} 
+    
+    <h3> Total Data Points in Dataset: {data.length} | 
+      
+      Data Points in Selected Range: {filteredData.length} 
     </h3>
   </div>
   <div className='dashboard-container'>
@@ -121,9 +123,9 @@ const Dashboard = () => {
             />
           </div>
             {/* this button for future use */}
-          {/* <div className='button'>
+          <div className='button'>
           <button onClick={handleSubmit}>Analyse Time Range</button>
-          </div>           */}
+          </div>           
         </div>
       </div>
     </div> 
