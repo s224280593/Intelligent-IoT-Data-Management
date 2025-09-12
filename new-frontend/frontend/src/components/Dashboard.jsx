@@ -49,7 +49,7 @@ const Dashboard = () => {
   // You can filter data, send to backend, or trigger chart updates
 
   console.log('Filtered Data:', filteredData);
-  console.log('Selected Pair:', selectedPair);
+  
  
 };
 
