@@ -1,0 +1,15 @@
+{
+  "name": "intelligent-iot-data-management",
+  "version": "1.0.0",
+  "description": "A modular platform for intelligent anomaly detection and visualization of time series sensor data from IoT devices.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
